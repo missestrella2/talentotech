@@ -1,0 +1,132 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.encabezado {
+    background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: #fff;
+    padding: 1.5em;
+    text-align: center;
+}
+
+.navegacion ul {
+    list-style: none;
+    padding: 0;
+}
+
+.navegacion ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.navegacion ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.principal {
+    padding: 2em;
+}
+
+.productos h2, .reseñas h2, .contacto h2 {
+    text-align: center;
+}
+
+.contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1.5em;
+}
+
+.tarjeta-producto {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1em;
+    text-align: center;
+    width: 45%;
+    box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-producto img {
+    max-width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.tarjeta-producto a {
+    color: #333;
+    text-decoration: none;
+}
+
+.reseñas {
+    margin-top: 2em;
+}
+
+.contenedor-reseñas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5em;
+}
+
+.card {
+    background-color: #eee;
+    padding: 1em;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.contacto {
+    margin-top: 2em;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5em;
+    border: none;
+    cursor: pointer;
+}
+
+.pie {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+}
+
+@media (max-width: 768px) {
+    .contenedor-tarjetas {
+        flex-direction: column;
+    }
+
+    .contenedor-reseñas {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        padding: 0 1em;
+    }
+}

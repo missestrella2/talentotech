@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Web</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <h1>Calzados Tatiana</h1>
+        <nav class="navegacion">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#reseñas">Reseñas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="principal">
+        <section id="productos" class="productos">
+            <h2>Productos Destacados</h2>
+            <div class="contenedor-tarjetas">
+                <div class="tarjeta-producto">
+                    <h3>Laura</h3>
+                    <img src="imagenes/ejemplo1.jpg" alt="Zapato Laura">
+                    <a href="#">Ver Más</a>
+                </div>
+                <div class="tarjeta-producto">
+                    <h3>Leti</h3>
+                    <img src="imagenes/ejemplo2.jpg" alt="Zapato Leti">
+                    <a href="#">Ver Más</a>
+                </div>
+                <div class="tarjeta-producto">
+                    <h3>Yuya</h3>
+                    <img src="imagenes/ejemplo3.jpg" alt="Zapato Yuya">
+                    <a href="#">Ver Más</a>
+                </div>
+                <div class="tarjeta-producto">
+                    <h3>María</h3>
+                    <img src="imagenes/ejemplo4.jpg" alt="Zapato María">
+                    <a href="#">Ver Más</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="reseñas" class="reseñas">
+            <h2>Reseñas de Clientes</h2>
+            <div class="contenedor-reseñas">
+                <div class="card">Excelente producto, superó mis expectativas.</div>
+                <div class="card">El servicio al cliente fue muy atento.</div>
+                <div class="card">Buena relación calidad-precio. Lo recomiendo.</div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contacto">
+            <h2>Contacto</h2>
+
+            <!-- modify this form HTML and place wherever you want your form -->
+            <form action="https://formspree.io/f/xldebezq" method="POST">
+                <label>
+                    Tu nombre:
+                    <input type="name" name="name">
+                </label>
+                <label>
+                    Tu email:
+                    <input type="email" name="email">
+                </label>
+                <label>
+                    Tu mensaje:
+                    <textarea name="message"></textarea>
+                </label>
+                <!-- your other form fields go here -->
+                <button type="submit">Enviar</button>
+            </form>
+            </form>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <p>&copy; 2024 By Cynthia</p>
+    </footer>
+
+</body>
+
+</html>
