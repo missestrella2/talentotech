@@ -9,4 +9,4 @@ Este proyecto es una muestra de una estructura básica de HTML y CSS para cumpli
 - Contenido multimedia (imágenes de ejemplo).
 - Navegación simulada con enlaces internos.
 
-Para ver el proyecto, accede a [GitHub Pages]([URL_DEL_SITIO](https://missestrella2.github.io/talentotech/)).
+Para ver el proyecto, accede a https://missestrella2.github.io/talentotech/
