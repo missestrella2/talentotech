@@ -1,40 +1,92 @@
+/* Fuentes y reset básico */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.productos h2 {
-    text-align: center;
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-.contenedor-tarjetas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 1.5em;
+/* Navbar */
+.nav-link {
+    color: #fff !important;
+    transition: color 0.3s ease;
 }
 
+.nav-link:hover {
+    color: #f8b400 !important;
+}
+
+/* Hero Section */
+video {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards de Productos */
 .tarjeta-producto {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 1em;
-    width: 45%;
-    box-sizing: border-box;
-    text-align: left;
-    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .tarjeta-producto:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05);
 }
 
 .tarjeta-producto img {
     max-width: 100%;
-    margin-bottom: 0.5em;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1em;
 }
 
-.tarjeta-producto a {
-    color: #333;
-    text-decoration: none;
+.tarjeta-producto p {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #f8b400;
+    border-color: #f8b400;
+}
+
+.btn-primary:hover {
+    background-color: #e09e00;
+    border-color: #e09e00;
+}
+
+/* Reseñas */
+.card {
+    border: none;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulario de contacto */
+#contact-form {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2em;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .tarjeta-producto {
+        width: 100%;
+    }
+
+    #contact-form {
+        width: 90%;
+        margin: auto;
+    }
 }
