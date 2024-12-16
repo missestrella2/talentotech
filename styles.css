@@ -1,0 +1,40 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.productos h2 {
+    text-align: center;
+}
+
+.contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1.5em;
+}
+
+.tarjeta-producto {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1em;
+    width: 45%;
+    box-sizing: border-box;
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-producto img {
+    max-width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.tarjeta-producto a {
+    color: #333;
+    text-decoration: none;
+}
