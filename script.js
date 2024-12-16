@@ -1,19 +1,22 @@
-// Array de productos
+// Array de productos disponibles
 const productos = [
-    { id: 1, nombre: "Laura", precio: 30.00, imagen: "imagenes/ejemplo1.jpg", descripcion: "Calzado cómodo y elegante." },
-    { id: 2, nombre: "Leti", precio: 25.00, imagen: "imagenes/ejemplo2.jpg", descripcion: "Perfecto para el día a día." },
-    { id: 3, nombre: "Yuya", precio: 28.00, imagen: "imagenes/ejemplo3.jpg", descripcion: "Diseño moderno y funcional." },
-    { id: 4, nombre: "María", precio: 32.00, imagen: "imagenes/ejemplo4.jpg", descripcion: "Ideal para eventos especiales." }
+    { id: 1, nombre: "Laura", precio: 30.00, imagen: "imagenes/ejemplo1.jpg" },
+    { id: 2, nombre: "Leti", precio: 25.00, imagen: "imagenes/ejemplo2.jpg" },
+    { id: 3, nombre: "Yuya", precio: 28.00, imagen: "imagenes/ejemplo3.jpg" },
+    { id: 4, nombre: "María", precio: 32.00, imagen: "imagenes/ejemplo4.jpg" }
 ];
 
-// Variables de carrito
+// Variables del carrito
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const cartCount = document.getElementById("cart-count");
-const productContainer = document.getElementById("product-container");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
 
-// Mostrar productos dinámicamente
+// Función para renderizar productos en el contenedor
 function renderizarProductos() {
+    const productContainer = document.getElementById("product-container");
     productContainer.innerHTML = "";
+
     productos.forEach(producto => {
         const card = document.createElement("div");
         card.classList.add("col-md-3", "tarjeta-producto");
@@ -24,24 +27,47 @@ function renderizarProductos() {
             <p class="fw-bold">$${producto.precio.toFixed(2)}</p>
             <button class="btn btn-dark mt-2" onclick="añadirAlCarrito(${producto.id})">Agregar al carrito</button>
         `;
-
-        // Evento para mostrar descripción ampliada
-        card.addEventListener("click", () => {
-            alert(`Descripción: ${producto.descripcion}`);
-        });
-
         productContainer.appendChild(card);
     });
 }
 
-// Actualizar el carrito
-function actualizarCarrito() {
+// Función para actualizar el contador del carrito
+function actualizarContador() {
     const totalProductos = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
     cartCount.textContent = totalProductos;
+}
+
+// Función para mostrar el carrito en el modal
+function mostrarCarrito() {
+    cartItemsContainer.innerHTML = "";
+    let total = 0;
+
+    carrito.forEach(producto => {
+        const subtotal = producto.cantidad * producto.precio;
+        total += subtotal;
+
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>${producto.nombre}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" onclick="modificarCantidad(${producto.id}, -1)">-</button>
+                ${producto.cantidad}
+                <button class="btn btn-sm btn-success" onclick="modificarCantidad(${producto.id}, 1)">+</button>
+            </td>
+            <td>$${producto.precio.toFixed(2)}</td>
+            <td>$${subtotal.toFixed(2)}</td>
+            <td>
+                <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+            </td>
+        `;
+        cartItemsContainer.appendChild(fila);
+    });
+
+    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-// Agregar al carrito
+// Función para añadir un producto al carrito
 function añadirAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
     const productoEnCarrito = carrito.find(p => p.id === id);
@@ -52,34 +78,33 @@ function añadirAlCarrito(id) {
         carrito.push({ ...producto, cantidad: 1 });
     }
 
-    actualizarCarrito();
+    actualizarContador();
+    mostrarCarrito();
 }
 
-// Validar formulario de contacto
-document.getElementById("contact-form").addEventListener("submit", function (e) {
-    const nombre = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const mensaje = document.getElementById("message").value.trim();
-
-    if (!nombre || !email || !mensaje) {
-        console.error("Todos los campos son obligatorios.");
-        e.preventDefault();
-    } else {
-        console.log("Formulario enviado correctamente.");
+// Función para modificar cantidad de un producto
+function modificarCantidad(id, cantidad) {
+    const producto = carrito.find(p => p.id === id);
+    if (producto) {
+        producto.cantidad += cantidad;
+        if (producto.cantidad <= 0) {
+            eliminarDelCarrito(id);
+        }
     }
-});
-
-// Consumir una API pública (simulado)
-function obtenerDatosAPI() {
-    fetch("https://fakestoreapi.com/products")
-        .then(res => res.json())
-        .then(data => console.log("Datos de la API:", data))
-        .catch(error => console.error("Error al consumir la API", error));
+    mostrarCarrito();
+    actualizarContador();
 }
 
-// Inicializar
+// Función para eliminar un producto del carrito
+function eliminarDelCarrito(id) {
+    carrito = carrito.filter(p => p.id !== id);
+    mostrarCarrito();
+    actualizarContador();
+}
+
+// Inicialización
 document.addEventListener("DOMContentLoaded", () => {
     renderizarProductos();
-    actualizarCarrito();
-    obtenerDatosAPI();
+    mostrarCarrito();
+    actualizarContador();
 });
