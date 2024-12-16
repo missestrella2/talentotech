@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <!-- Header (opcional una sección "Inicio") -->
+    <!-- Header -->
     <header class="bg-light py-5" id="inicio">
         <div class="container text-center">
             <h1 class="display-4">Bienvenid@ a Calzados Tatiana</h1>
@@ -51,11 +51,34 @@
 
     <main>
         <!-- Sección Productos -->
-        <section id="productos" class="py-5">
+        <section id="productos" class="py-5 productos">
             <div class="container">
                 <h2 class="text-center mb-4">Productos Destacados</h2>
-                <div class="row" id="productos-container">
-                    <!-- aquí se insertan las tarjetas de productos con js -->
+                <div class="contenedor-tarjetas d-flex flex-wrap justify-content-around gap-3">
+                    <div class="tarjeta-producto text-start">
+                        <h3>Laura</h3>
+                        <img src="imagenes/ejemplo1.jpg" alt="Zapato Laura" class="img-fluid">
+                        <a href="#">Ver Más</a>
+                        <button class="btn btn-dark mt-2" onclick="añadirAlCarrito('Laura')">Agregar al carrito</button>
+                    </div>
+                    <div class="tarjeta-producto text-start">
+                        <h3>Leti</h3>
+                        <img src="imagenes/ejemplo2.jpg" alt="Zapato Leti" class="img-fluid">
+                        <a href="#">Ver Más</a>
+                        <button class="btn btn-dark mt-2" onclick="añadirAlCarrito('Leti')">Agregar al carrito</button>
+                    </div>
+                    <div class="tarjeta-producto text-start">
+                        <h3>Yuya</h3>
+                        <img src="imagenes/ejemplo3.jpg" alt="Zapato Yuya" class="img-fluid">
+                        <a href="#">Ver Más</a>
+                        <button class="btn btn-dark mt-2" onclick="añadirAlCarrito('Yuya')">Agregar al carrito</button>
+                    </div>
+                    <div class="tarjeta-producto text-start">
+                        <h3>María</h3>
+                        <img src="imagenes/ejemplo4.jpg" alt="Zapato María" class="img-fluid">
+                        <a href="#">Ver Más</a>
+                        <button class="btn btn-dark mt-2" onclick="añadirAlCarrito('María')">Agregar al carrito</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -68,21 +91,21 @@
                     <div class="col-md-4">
                         <div class="card p-3 shadow">
                             <div class="card-body">
-                                <p>excelente producto, superó mis expectativas.</p>
+                                <p class="text-start">excelente producto, superó mis expectativas.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card p-3 shadow">
                             <div class="card-body">
-                                <p>el servicio al cliente fue muy atento.</p>
+                                <p class="text-start">el servicio al cliente fue muy atento.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card p-3 shadow">
                             <div class="card-body">
-                                <p>buena relación calidad-precio. lo recomiendo.</p>
+                                <p class="text-start">buena relación calidad-precio. lo recomiendo.</p>
                             </div>
                         </div>
                     </div>
