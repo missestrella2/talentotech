@@ -1,109 +1,85 @@
-//aca definimos los productos con precios (asignados arbitrariamente) para poder agregar al carrito
+// Array de productos
 const productos = [
-    { nombre: "Laura", precio: 30.00 },
-    { nombre: "Leti", precio: 25.00 },
-    { nombre: "Yuya", precio: 28.00 },
-    { nombre: "María", precio: 32.00 }
+    { id: 1, nombre: "Laura", precio: 30.00, imagen: "imagenes/ejemplo1.jpg", descripcion: "Calzado cómodo y elegante." },
+    { id: 2, nombre: "Leti", precio: 25.00, imagen: "imagenes/ejemplo2.jpg", descripcion: "Perfecto para el día a día." },
+    { id: 3, nombre: "Yuya", precio: 28.00, imagen: "imagenes/ejemplo3.jpg", descripcion: "Diseño moderno y funcional." },
+    { id: 4, nombre: "María", precio: 32.00, imagen: "imagenes/ejemplo4.jpg", descripcion: "Ideal para eventos especiales." }
 ];
 
-//aca cargamos el carrito desde localstorage o lo iniciamos vacío
+// Variables de carrito
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const cartCount = document.getElementById("cart-count");
+const productContainer = document.getElementById("product-container");
 
-//aca actualizamos el ícono con la cantidad total
+// Mostrar productos dinámicamente
+function renderizarProductos() {
+    productContainer.innerHTML = "";
+    productos.forEach(producto => {
+        const card = document.createElement("div");
+        card.classList.add("col-md-3", "tarjeta-producto");
+
+        card.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid">
+            <p class="fw-bold">$${producto.precio.toFixed(2)}</p>
+            <button class="btn btn-dark mt-2" onclick="añadirAlCarrito(${producto.id})">Agregar al carrito</button>
+        `;
+
+        // Evento para mostrar descripción ampliada
+        card.addEventListener("click", () => {
+            alert(`Descripción: ${producto.descripcion}`);
+        });
+
+        productContainer.appendChild(card);
+    });
+}
+
+// Actualizar el carrito
 function actualizarCarrito() {
     const totalProductos = carrito.reduce((acc, prod) => acc + prod.cantidad, 0);
     cartCount.textContent = totalProductos;
-}
-
-//aca guardamos el carrito en localstorage
-function guardarCarrito() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-//aca agregamos un producto al carrito
-function añadirAlCarrito(nombreProducto) {
-    const producto = productos.find(p => p.nombre === nombreProducto);
-    if (!producto) return;
-
-    const productoEnCarrito = carrito.find(p => p.nombre === nombreProducto);
+// Agregar al carrito
+function añadirAlCarrito(id) {
+    const producto = productos.find(p => p.id === id);
+    const productoEnCarrito = carrito.find(p => p.id === id);
 
     if (productoEnCarrito) {
-        productoEnCarrito.cantidad += 1;
+        productoEnCarrito.cantidad++;
     } else {
         carrito.push({ ...producto, cantidad: 1 });
     }
 
     actualizarCarrito();
-    guardarCarrito();
 }
 
-//aca mostramos el carrito en el modal
-function mostrarCarrito() {
-    const cartTableBody = document.getElementById("cart-table-body");
-    const cartTotal = document.getElementById("cart-total");
-    cartTableBody.innerHTML = "";
-    let total = 0;
+// Validar formulario de contacto
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+    const nombre = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mensaje = document.getElementById("message").value.trim();
 
-    carrito.forEach(producto => {
-        const subtotal = producto.cantidad * producto.precio;
-        total += subtotal;
-
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${producto.nombre}</td>
-            <td>
-                <button class="btn btn-sm btn-danger" onclick="modificarCantidad('${producto.nombre}', -1)">-</button>
-                ${producto.cantidad}
-                <button class="btn btn-sm btn-success" onclick="modificarCantidad('${producto.nombre}', 1)">+</button>
-            </td>
-            <td>$${producto.precio.toFixed(2)}</td>
-            <td>$${subtotal.toFixed(2)}</td>
-            <td>
-                <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito('${producto.nombre}')">Eliminar</button>
-            </td>
-        `;
-        cartTableBody.appendChild(fila);    
-    });
-    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-}
-
-//aca modificamos la cantidad de un producto en el carrito
-function modificarCantidad(nombreProducto, cantidad) {
-    const producto = carrito.find(p => p.nombre === nombreProducto);
-    if (producto) {
-        producto.cantidad += cantidad;
-        if (producto.cantidad <= 0) {
-            eliminarDelCarrito(nombreProducto);
-        }
-        actualizarCarrito();
-        guardarCarrito();
-        mostrarCarrito();
+    if (!nombre || !email || !mensaje) {
+        console.error("Todos los campos son obligatorios.");
+        e.preventDefault();
+    } else {
+        console.log("Formulario enviado correctamente.");
     }
-}
-
-//aca eliminamos un producto del carrito
-function eliminarDelCarrito(nombreProducto) {
-    carrito = carrito.filter(p => p.nombre !== nombreProducto);
-    actualizarCarrito();
-    guardarCarrito();
-    mostrarCarrito();
-}
-
-//aca abrimos el modal del carrito al hacer clic en el ícono
-document.getElementById("cart-icon").addEventListener("click", () => {
-    mostrarCarrito();
-    const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
-    cartModal.show();
 });
 
-//inicializamos el contador del carrito
-actualizarCarrito();
+// Consumir una API pública (simulado)
+function obtenerDatosAPI() {
+    fetch("https://fakestoreapi.com/products")
+        .then(res => res.json())
+        .then(data => console.log("Datos de la API:", data))
+        .catch(error => console.error("Error al consumir la API", error));
+}
 
-//aca reseteamos el form después de enviarlo
-const form = document.getElementById('contact-form');
-form.addEventListener('submit', function (event) {
-    setTimeout(() => {
-        form.reset();
-    }, 100); 
+// Inicializar
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarProductos();
+    actualizarCarrito();
+    obtenerDatosAPI();
 });
